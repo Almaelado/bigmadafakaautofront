@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function BasicExample() {
+function bejelentkez() {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -22,4 +22,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default bejelentkez;

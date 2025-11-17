@@ -19,7 +19,7 @@ const Autok = () => {
     }, []);
 
     return (
-        <div className="autok-container">
+    <div className="autok-container">
     <h1>Autók Listája</h1>
     <div className="autok-grid">
         {autok.map((auto, index) => (
