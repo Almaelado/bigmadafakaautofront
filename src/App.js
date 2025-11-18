@@ -1,3 +1,4 @@
+import './App.css'; 
 import Autok from './components/autok.jsx';
 import Bejelentkez from './components/bejelentkezAdmin.jsx'
 import Szures from './components/szures.jsx'

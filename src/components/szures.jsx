@@ -61,7 +61,7 @@ export default function Szures({ value, onSearch }) {
   };
 
   return (
-    <div className="p-4 bg-dark" style={{ width: "400px" }}>
+    <div id="Szures" >
       <TypeaheadComponent
         label="Gyártmányok"
         options={gyartmanyokList}
