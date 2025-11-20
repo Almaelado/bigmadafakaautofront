@@ -35,7 +35,7 @@ export default function Kezdolap() {
         {kiemeltAutok.map((auto) => (
           <Col key={auto.id} md={4} className="mb-3">
             <Card>
-              <Card.Img variant="top" src={auto.kep || "/kepek/default.jpg"} />
+              <Card.Img variant="top" src={`/img/${auto.id}_1.jpg`} />
               <Card.Body>
                 <Card.Title>{auto.marka} {auto.modell}</Card.Title>
                 <Card.Text>Ár: {auto.ar} Ft</Card.Text>
