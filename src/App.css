@@ -1,6 +1,29 @@
 #Szures {
   background-color: rgb(46, 44, 44);
-  width: 40000px;
+  width: 400px;
   padding: 20px;
 
+}
+
+.auto-details-page #Szures {  
+  width: auto !important;
+  max-width: 400px !important; /* vagy amit akarsz */
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: 32px;
+  min-height: 100vh;
+  padding-right: 32px;
+  background: #fafbfc;
+}
+
+.autok-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
