@@ -3,9 +3,9 @@ import { useState,useEffect } from "react";
 import {Card,ListGroup,Row, Col} from "react-bootstrap";
 import './Autok.css';
 
-const Autok = () => {
+const Autok = ({szuro}) => {
     const [autok, setAutok] = useState([]);
-    
+    console.log(szuro);
     const fetchAutok = async () => {
         try {
             const response = await http.get("/auto");
