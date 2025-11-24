@@ -1,19 +1,47 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import TypeaheadComponent from "./typeahead.jsx";
 import RangeSlider from "./RangeSlider.jsx";
 import Checkbox from "./checkbox.jsx";
 import Button from 'react-bootstrap/Button';
+import http from "../http-common";
 
 export default function Szures({ value, onSearch }) {
     // Állapotok
     const [markak, setMarkak] = useState([]);
-    const gyartmanyokList = ["Audi","BMW","Mercedes","Volkswagen","Toyota","Opel","Ford","Kia","Hyundai"];
+    const [markaList, setMarkaList] = useState([]);
+
+    const fetchMarkak = async () => {
+      try {
+        const response = await http.get('auto/marka');
+        setMarkaList(response.data);
+      } catch (error) {
+        console.error("Error fetching markak:", error);
+      }
+    };
 
     const [uzemanyag, setUzemanyag] = useState([]);
-    const uzemanyagList = ["Benzin","Dízel","Elektromos","Hibrid"];
+    const [uzemanyagList, setUzemanyagList] = useState([]);
+
+    const fetchUzemanyagok = async () => {
+      try {
+        const response = await http.get('auto/uzemanyag');
+        setUzemanyagList(response.data);
+      } catch (error) {
+        console.error("Error fetching uzemanyag:", error);
+      }
+    };
 
     const [szin, setSzin] = useState([]);
-    const szinList = ["Fekete","Fehér","Szürke","Kék","Piros","Zöld","Sárga"];
+    const [szinList, setSzinList] = useState([]);
+
+    const fetchSzinek = async () => {
+      try {
+        const response = await http.get('auto/szin');
+        setSzinList(response.data);
+      } catch (error) {
+        console.error("Error fetching szin:", error);
+      }
+    };
 
     const [valto, setValto] = useState([]);
 
@@ -21,7 +49,6 @@ export default function Szures({ value, onSearch }) {
 
     const maxKm = 500000;
     const [kmRange, setKmRange] = useState([0,maxKm]);
-    
 
     const maxAr = 20000000;
     const [arRange, setArRange] = useState([0, maxAr]); // kétvégű csúszka
@@ -30,6 +57,14 @@ export default function Szures({ value, onSearch }) {
     const [irat, setIrat] = useState(false);
     const [ajto, setAjto] = useState("");
     const [szemely, setSzemely] = useState("");
+
+    const [showMore, setShowMore] = useState(false);
+
+    useEffect(() => {
+      fetchMarkak();
+      fetchUzemanyagok();
+      fetchSzinek();
+    }, []);
 
   // Kezelők (NEM hívnak többé triggerOnChange-t)
   const handleMarkakChange = setMarkak;
@@ -63,8 +98,9 @@ export default function Szures({ value, onSearch }) {
   return (
     <div id="Szures" >
       <TypeaheadComponent
-        label="Gyártmányok"
-        options={gyartmanyokList}
+        label="Gyártányok"
+        options={markaList}
+        labelKey="nev"
         value={markak}
         onChange={handleMarkakChange}
       />
@@ -72,12 +108,14 @@ export default function Szures({ value, onSearch }) {
       <TypeaheadComponent
         label="Üzemanyagok"
         options={uzemanyagList}
+        labelKey="nev"
         value={uzemanyag}
         onChange={handleUzemanyagChange}
       />
         <TypeaheadComponent
         label="Színek"
         options={szinList}
+        labelKey="nev"
         value={szin}
         onChange={handleSzinChange}
       />
@@ -112,6 +150,39 @@ export default function Szures({ value, onSearch }) {
         <Checkbox cim="Érvényes Magyar Okmányokkal" value={irat} onChange={setIrat} />
 
         <Button variant="outline-info" onClick={handleSearch}>Keresés</Button>
+         <p style={{cursor: "pointer", color: "blue"}} onClick={() => setShowMore(!showMore)}>
+        {showMore ? "Kevesebb szűrő" : "További szűrők"}
+      </p>
+
+      {/* További szűrők */}
+      {showMore && (
+        <div id="moreFilters">
+          <TypeaheadComponent
+            label="Váltó típus"
+            options={["Automata", "Manuális"]}
+            value={valto}
+            onChange={setValto}
+          />
+          <TypeaheadComponent
+            label="Motorméret"
+            options={["1.0", "1.2", "1.6", "2.0", "2.5", "3.0"]}
+            value={motormeret}
+            onChange={setMotormeret}
+          />
+          <TypeaheadComponent
+            label="Ajtók száma"
+            options={["3", "4", "5"]}
+            value={ajto}
+            onChange={setAjto}
+          />
+          <TypeaheadComponent
+            label="Személyek száma"
+            options={["2", "4", "5", "7"]}
+            value={szemely}
+            onChange={setSzemely}
+          />
+        </div>
+      )}
     </div>
   );
 }
