@@ -10,15 +10,17 @@ const Autok = ({ szuro }) => {
 
     const fetchAutok = async () => {
         try {
-            const response = await http.get("/auto/minden");
+            const response = await http.post("/auto/szuro",szuro);
+            console.log("Fetched autok:", response.data);
             setAutok(response.data);
         } catch (error) {
             console.error("Error fetching autok:", error);
         }
     };
     useEffect(() => {
-        fetchAutok();
-    }, []);
+        //console.log("Fetching autok with szuro:", szuro);
+        fetchAutok(szuro);
+    }, [szuro]);
 
     // If a car is selected, show its details
     if (selectedAutoId !== null) {

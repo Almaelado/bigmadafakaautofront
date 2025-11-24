@@ -15,6 +15,22 @@ export default function TypeaheadComponent({ options, value, onChange, label, la
     onChange(updatedValues);
   };
 
+  // Normalize options so the labelKey field is always a string (Typeahead requires string labels)
+  const normalizedOptions = (options || []).map((opt) => {
+    if (!labelKey) return opt;
+    const val = opt[labelKey];
+    // If it's already a string or null/undefined, leave it, otherwise stringify
+    if (val == null) return opt;
+    if (typeof val === "string") return opt;
+    return { ...opt, [labelKey]: String(val) };
+  });
+
+  // Filter out already selected values by comparing strings
+  const filteredOptions = normalizedOptions.filter((m) => {
+    const optLabel = labelKey ? m[labelKey] : m;
+    return !selectedValues.includes(optLabel);
+  });
+
   return (
     <div className="mb-3">
       <label className="form-label text-white">{label || "Kiválasztott:"}</label>
@@ -25,7 +41,7 @@ export default function TypeaheadComponent({ options, value, onChange, label, la
             className="badge bg-primary me-2"
             style={{ display: "inline-flex", alignItems: "center", padding: "0.4rem 0.6rem" }}
           >
-            {item} 
+            {item}
             <button
               type="button"
               className="btn-close btn-close-white ms-2"
@@ -39,7 +55,7 @@ export default function TypeaheadComponent({ options, value, onChange, label, la
 
       <Typeahead
         id="typeahead-search"
-        options={options.filter(m => !selectedValues.includes(labelKey ? m[labelKey] : m))} // csak a még nem kiválasztottak
+        options={filteredOptions} // csak a még nem kiválasztottak
         placeholder="Elkezdesz írni..."
         selected={[]}
         multiple={false} // egy választás egyszerre
@@ -47,7 +63,8 @@ export default function TypeaheadComponent({ options, value, onChange, label, la
         onChange={(selected) => {
           if (selected.length === 0) return;
 
-          const newValue = labelKey ? selected[0][labelKey] : selected[0];
+          const rawValue = labelKey ? selected[0][labelKey] : selected[0];
+          const newValue = rawValue == null ? rawValue : String(rawValue);
           const updatedValues = [...selectedValues, newValue];
           setSelectedValues(updatedValues);
           onChange(updatedValues);
