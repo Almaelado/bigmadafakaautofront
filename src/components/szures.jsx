@@ -73,7 +73,6 @@ export default function Szures({ value, onSearch }) {
   const handleArChange = setArRange;
   const handleKmChange = setKmRange;
   const handleEvjaratChange = setEvjarat;
-
   // Csak gombnyomásra adja át a szűrőt
   const handleSearch = () => {
     const filters = {
