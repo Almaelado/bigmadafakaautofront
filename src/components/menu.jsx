@@ -15,8 +15,8 @@ export default function Menu() {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Kezdőlap</Nav.Link>
             <Nav.Link as={Link} to="/autok">Autók</Nav.Link>
-            <Nav.Link as={Link} to="/bejelentkez">Bejelentkezés</Nav.Link>
             <Nav.Link as={Link} to="/regisztracio">Regisztráció</Nav.Link>
+            <Nav.Link as={Link} to="/bejelentkez">Bejelentkezés</Nav.Link>
           </Nav>
         </Navbar.Collapse>
 

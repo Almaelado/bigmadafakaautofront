@@ -31,6 +31,8 @@ export default function Szures({ value, onSearch }) {
     const [ajto, setAjto] = useState("");
     const [szemely, setSzemely] = useState("");
 
+    const [showMore, setShowMore] = useState(false);
+
   // Kezelők (NEM hívnak többé triggerOnChange-t)
   const handleMarkakChange = setMarkak;
   const handleSzinChange = setSzin;
@@ -112,6 +114,39 @@ export default function Szures({ value, onSearch }) {
         <Checkbox cim="Érvényes Magyar Okmányokkal" value={irat} onChange={setIrat} />
 
         <Button variant="outline-info" onClick={handleSearch}>Keresés</Button>
+         <p style={{cursor: "pointer", color: "blue"}} onClick={() => setShowMore(!showMore)}>
+        {showMore ? "Kevesebb szűrő" : "További szűrők"}
+      </p>
+
+      {/* További szűrők */}
+      {showMore && (
+        <div id="moreFilters">
+          <TypeaheadComponent
+            label="Váltó típus"
+            options={["Automata", "Manuális"]}
+            value={valto}
+            onChange={setValto}
+          />
+          <TypeaheadComponent
+            label="Motorméret"
+            options={["1.0", "1.2", "1.6", "2.0", "2.5", "3.0"]}
+            value={motormeret}
+            onChange={setMotormeret}
+          />
+          <TypeaheadComponent
+            label="Ajtók száma"
+            options={["3", "4", "5"]}
+            value={ajto}
+            onChange={setAjto}
+          />
+          <TypeaheadComponent
+            label="Személyek száma"
+            options={["2", "4", "5", "7"]}
+            value={szemely}
+            onChange={setSzemely}
+          />
+        </div>
+      )}
     </div>
   );
 }
