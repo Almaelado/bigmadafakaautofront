@@ -1,19 +1,47 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import TypeaheadComponent from "./typeahead.jsx";
 import RangeSlider from "./RangeSlider.jsx";
 import Checkbox from "./checkbox.jsx";
 import Button from 'react-bootstrap/Button';
+import http from "../http-common";
 
 export default function Szures({ value, onSearch }) {
     // Állapotok
     const [markak, setMarkak] = useState([]);
-    const gyartmanyokList = ["Audi","BMW","Mercedes","Volkswagen","Toyota","Opel","Ford","Kia","Hyundai"];
+    const [markaList, setMarkaList] = useState([]);
+
+    const fetchMarkak = async () => {
+      try {
+        const response = await http.get('auto/marka');
+        setMarkaList(response.data);
+      } catch (error) {
+        console.error("Error fetching markak:", error);
+      }
+    };
 
     const [uzemanyag, setUzemanyag] = useState([]);
-    const uzemanyagList = ["Benzin","Dízel","Elektromos","Hibrid"];
+    const [uzemanyagList, setUzemanyagList] = useState([]);
+
+    const fetchUzemanyagok = async () => {
+      try {
+        const response = await http.get('auto/uzemanyag');
+        setUzemanyagList(response.data);
+      } catch (error) {
+        console.error("Error fetching uzemanyag:", error);
+      }
+    };
 
     const [szin, setSzin] = useState([]);
-    const szinList = ["Fekete","Fehér","Szürke","Kék","Piros","Zöld","Sárga"];
+    const [szinList, setSzinList] = useState([]);
+
+    const fetchSzinek = async () => {
+      try {
+        const response = await http.get('auto/szin');
+        setSzinList(response.data);
+      } catch (error) {
+        console.error("Error fetching szin:", error);
+      }
+    };
 
     const [valto, setValto] = useState([]);
 
@@ -21,7 +49,6 @@ export default function Szures({ value, onSearch }) {
 
     const maxKm = 500000;
     const [kmRange, setKmRange] = useState([0,maxKm]);
-    
 
     const maxAr = 20000000;
     const [arRange, setArRange] = useState([0, maxAr]); // kétvégű csúszka
@@ -32,6 +59,12 @@ export default function Szures({ value, onSearch }) {
     const [szemely, setSzemely] = useState("");
 
     const [showMore, setShowMore] = useState(false);
+
+    useEffect(() => {
+      fetchMarkak();
+      fetchUzemanyagok();
+      fetchSzinek();
+    }, []);
 
   // Kezelők (NEM hívnak többé triggerOnChange-t)
   const handleMarkakChange = setMarkak;
@@ -65,8 +98,9 @@ export default function Szures({ value, onSearch }) {
   return (
     <div id="Szures" >
       <TypeaheadComponent
-        label="Gyártmányok"
-        options={gyartmanyokList}
+        label="Gyártányok"
+        options={markaList}
+        labelKey="nev"
         value={markak}
         onChange={handleMarkakChange}
       />
@@ -74,12 +108,14 @@ export default function Szures({ value, onSearch }) {
       <TypeaheadComponent
         label="Üzemanyagok"
         options={uzemanyagList}
+        labelKey="nev"
         value={uzemanyag}
         onChange={handleUzemanyagChange}
       />
         <TypeaheadComponent
         label="Színek"
         options={szinList}
+        labelKey="nev"
         value={szin}
         onChange={handleSzinChange}
       />

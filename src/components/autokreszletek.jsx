@@ -10,7 +10,7 @@ export default function Autokreszletek({ autoId }) {
   useEffect(() => {
     const fetchAutoDetails = async () => {
       try {
-        const response = await http.get(`/autoMod/${autoId}`);
+        const response = await http.get(`/auto/egy/${autoId}`);
         setAuto(response.data);
       } catch (error) {
         setError("Nem sikerült betölteni az autó adatait.");

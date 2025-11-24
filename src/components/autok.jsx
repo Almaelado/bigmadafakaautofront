@@ -10,7 +10,7 @@ const Autok = ({ szuro }) => {
 
     const fetchAutok = async () => {
         try {
-            const response = await http.get("/auto");
+            const response = await http.get("/auto/minden");
             setAutok(response.data);
         } catch (error) {
             console.error("Error fetching autok:", error);

@@ -1,7 +1,7 @@
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useState, useEffect } from "react";
 
-export default function TypeaheadComponent({ options, value, onChange, label }) {
+export default function TypeaheadComponent({ options, value, onChange, label, labelKey }) {
   const [selectedValues, setSelectedValues] = useState(value || []);
 
   useEffect(() => {
@@ -39,14 +39,15 @@ export default function TypeaheadComponent({ options, value, onChange, label }) 
 
       <Typeahead
         id="typeahead-search"
-        options={options.filter(m => !selectedValues.includes(m))} // csak a még nem kiválasztottak
+        options={options.filter(m => !selectedValues.includes(labelKey ? m[labelKey] : m))} // csak a még nem kiválasztottak
         placeholder="Elkezdesz írni..."
         selected={[]}
         multiple={false} // egy választás egyszerre
+        labelKey={labelKey || ((option) => option)}
         onChange={(selected) => {
           if (selected.length === 0) return;
 
-          const newValue = selected[0];
+          const newValue = labelKey ? selected[0][labelKey] : selected[0];
           const updatedValues = [...selectedValues, newValue];
           setSelectedValues(updatedValues);
           onChange(updatedValues);

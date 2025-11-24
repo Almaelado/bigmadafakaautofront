@@ -10,7 +10,7 @@ export default function Kezdolap() {
   useEffect(() => {
     const fetchAutok = async () => {
       try {
-        const response = await http.get("/auto");
+        const response = await http.get("/auto/minden");
         setAutok(response.data);
 
         // Véletlenszerű 5 autó kiválasztása
@@ -39,7 +39,7 @@ export default function Kezdolap() {
               <Card.Body>
                 <Card.Title>{auto.marka} {auto.modell}</Card.Title>
                 <Card.Text>Ár: {auto.ar} Ft</Card.Text>
-                <Button as={Link} to={`/autok/${auto.id}`} variant="primary">Részletek</Button>
+                <Button as={Link} to={`/auto/egy/${auto.id}`} variant="primary">Részletek</Button>
               </Card.Body>
             </Card>
           </Col>
