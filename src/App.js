@@ -1,12 +1,16 @@
 import './App.css'; 
 import Autok from './components/autok.jsx';
-import Bejelentkez from './components/bejelentkezes.jsx'
-import Szures from './components/szures.jsx'
-import Menu from './components/menu.jsx';
-
+import Bejelentkez from './components/bejelentkez.jsx';
+import Regisztracio from './components/regisztracio.jsx';
+import Szures from './components/szures.jsx';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Menu from './components/menu.jsx';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   const [szur, setSzur] = useState("");
@@ -15,15 +19,29 @@ function App() {
     <BrowserRouter>
       <Menu />
       <div className="App">
-        <Szures onSearch={filterString => setSzur(filterString)} />
-        <Autok szuro={szur} />
-
-        {/* Példa route-ok */}
         <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Szures onSearch={(filter) => setSzur(filter)} />
+                <Autok szuro={szur} />
+              </>
+            }
+          />
+          <Route
+            path="/autok"
+            element={
+              <>
+                <Szures onSearch={(filter) => setSzur(filter)} />
+                <Autok szuro={szur} />
+              </>
+            }
+          />
           <Route path="/bejelentkez" element={<Bejelentkez />} />
-          {/* Itt jöhetnek a többi route-ok */}
+          <Route path="/regisztracio" element={<Regisztracio />} />
         </Routes>
-      </div>    
+      </div>
     </BrowserRouter>
   );
 }
