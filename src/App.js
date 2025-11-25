@@ -10,7 +10,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  const [szur, setSzur] = useState("");
+  const [szur, setSzur] = useState(JSON.stringify({
+            markak:[],      
+            uzemanyag:[],       
+            szin:[],               
+            arRange:[],
+            kmRange:[],
+            evjarat:[],
+            irat:false,
+            valto:[],                  
+            motormeret:0,
+            ajto:[],                           
+            szemely:[]                         
+        }));
   
   return (
     <BrowserRouter>
