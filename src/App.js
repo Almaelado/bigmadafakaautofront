@@ -38,6 +38,7 @@ function App() {
           <Route path="/bejelentkez" element={<Bejelentkez />} />
         </Routes>
       </div>
+      <div>{szur}</div>
     </BrowserRouter>
   );
 }
