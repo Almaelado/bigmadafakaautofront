@@ -26,6 +26,7 @@ export default function Bejelentkez() {
     };
 
     return (
+    <div className="container mt-5" style={{ maxWidth: "500px" }}>
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="userUsername">
                 <Form.Label>Felhasználónév</Form.Label>
@@ -53,6 +54,7 @@ export default function Bejelentkez() {
                 Bejelentkezés
             </Button>
         </Form>
+    </div>
     );
 }
 

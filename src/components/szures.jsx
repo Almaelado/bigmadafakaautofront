@@ -25,10 +25,10 @@ export default function Szures({ value, onSearch }) {
 
     const [evjarat, setEvjarat] = useState([1900,new Date().getFullYear()]);
 
-    const maxKm = 500000;
+    const maxKm = 200000;
     const [kmRange, setKmRange] = useState([0,maxKm]);
 
-    const maxAr = 20000000;
+    const maxAr = 3000000;
     const [arRange, setArRange] = useState([0, maxAr]); // kétvégű csúszka
 
     const [motormeret, setMotormeret] = useState("");

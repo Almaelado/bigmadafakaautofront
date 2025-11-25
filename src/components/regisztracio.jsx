@@ -38,6 +38,7 @@ export default function Regisztracio() {
     };
 
     return (
+    <div className="container mt-5" style={{ maxWidth: "500px" }}>
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="regUsername">
                 <Form.Label>Felhasználónév</Form.Label>
@@ -86,5 +87,6 @@ export default function Regisztracio() {
                 Regisztráció
             </Button>
         </Form>
+    </div>
     );
 }

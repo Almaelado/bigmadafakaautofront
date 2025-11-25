@@ -4,7 +4,8 @@ import Bejelentkez from './components/bejelentkez.jsx';
 import Regisztracio from './components/regisztracio.jsx';
 import Szures from './components/szures.jsx';
 import Menu from './components/menu.jsx';
-import Fooldal from './components/fooldal.jsx';
+import Kezdolap from './components/kezdolap.jsx';
+import Footer from './components/footer.jsx';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ function App() {
             path="/"
             element={
               <>
-                <Fooldal />
+                <Kezdolap />
               </>
             }
           />
@@ -38,7 +39,7 @@ function App() {
           <Route path="/bejelentkez" element={<Bejelentkez />} />
         </Routes>
       </div>
-      <div>{szur}</div>
+      <Footer />
     </BrowserRouter>
   );
 }

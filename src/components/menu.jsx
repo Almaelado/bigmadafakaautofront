@@ -8,7 +8,7 @@ export default function Menu() {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
 
-        <Navbar.Brand as={Link} to="/">Ndidi Merci kölcsönző</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Ndidi Autó kölcsönző</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="nav" />
         <Navbar.Collapse id="nav">
