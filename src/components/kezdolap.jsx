@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Row, Col, Container } from 'react-bootstrap';
-import http from '../http-common'; // feltételezve, hogy így importálod az axios instance-t
+import http from '../http-common';
 
 export default function Kezdolap() {
   const [autok, setAutok] = useState([]);
