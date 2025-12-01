@@ -32,16 +32,17 @@ export default function FoOldal() {
       }
 
   return (
-    <Container className="my-5">
-      <h2 className="mb-4">Kiemelt Autók</h2>
-      <Row>
-        {randomAutok.map((auto) => (
-          <Col key={auto.id} md={4} className="mb-3">
-            <Card>
-              <Card.Img
-                variant="top"
-                src={`/img/${auto.id}_1.jpg`}
-                onError={(e) => {
+    <div id="fo-oldal">
+      <Container className="my-5">
+        <h2 className="mb-4">Kiemelt Autók</h2>
+        <Row>
+          {randomAutok.map((auto) => (
+            <Col key={auto.id} md={4} className="mb-3">
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src={`/img/${auto.id}_1.jpg`}
+                  onError={(e) => {
                   e.target.src = "https://via.placeholder.com/300x200";
                 }}
               />
@@ -57,5 +58,6 @@ export default function FoOldal() {
         ))}
       </Row>
     </Container>
+    </div>
   );
 }

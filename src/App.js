@@ -29,10 +29,10 @@ function App() {
           <Route
             path="/autok"
             element={
-              <>
+              <div className='Hargita'>
                 <Szures onSearch={(filter) => setSzur(filter)} />
                 <Autok szuro={szur} />
-              </>
+              </div>
             }
           />
           <Route path="/regisztracio" element={<Regisztracio />} />
