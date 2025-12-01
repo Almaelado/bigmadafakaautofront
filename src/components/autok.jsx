@@ -10,10 +10,12 @@ const Autok = ({ szuro }) => {
 
     const fetchAutok = async () => {
         try {
+            console.log(szuro)
             const response = await http.post("/auto/szuro",szuro);
             console.log("Fetched autok:", response.data);
             setAutok(response.data);
         } catch (error) {
+            console.log(szuro);
             console.error("Error fetching autok:", error);
         }
     };

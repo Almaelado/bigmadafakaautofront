@@ -31,7 +31,8 @@ export default function Szures({ value, onSearch }) {
     const maxAr = 3000000;
     const [arRange, setArRange] = useState([0, maxAr]); // kétvégű csúszka
 
-    const [motormeret, setMotormeret] = useState("");
+    const [motormeret, setMotormeret] = useState(0);
+
     const [irat, setIrat] = useState(false);
 
     const [ajto, setAjto] = useState([]);
@@ -195,7 +196,7 @@ export default function Szures({ value, onSearch }) {
             value={valto}
             onChange={setValto}
           />
-          <input name="motormeret" type="number" value={motormeret} onChange={setMotormeret}/>
+          <input name="motormeret" type="number" value={motormeret} onChange={(e)=>setMotormeret(e.target.value)}/>
           <TypeaheadComponent
             label="Ajtók száma"
             labelKey="ajtoszam"
